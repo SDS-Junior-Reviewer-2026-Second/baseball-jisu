@@ -11,7 +11,6 @@ public class GuessResult {
         this.balls = balls;
     }
 
-
     public int getBalls() {
         return balls;
     }

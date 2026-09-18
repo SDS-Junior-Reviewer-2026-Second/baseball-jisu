@@ -11,12 +11,20 @@ public class Game {
         }
         else {
             int strikeCnt = 0;
+            int ballCnt = 0;
             for (int i = 0; i < 3; i++){
-                if (guessNumber.charAt(i) == question.charAt(i)){
-                    strikeCnt++;
+                int digit = guessNumber.charAt(i);
+                int indexInQuestion = question.indexOf(digit);
+                if (indexInQuestion != -1){
+                    if (indexInQuestion == i){
+                        strikeCnt++;
+                    }
+                    else{
+                        ballCnt++;
+                    }
                 }
             }
-            return new GuessResult(false, strikeCnt, 0);
+            return new GuessResult(false, strikeCnt, ballCnt);
         }
     }
 
