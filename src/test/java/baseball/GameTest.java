@@ -26,31 +26,36 @@ public class GameTest {
 
     @Test
     public void 숫자_세개가_전부_일치_할_경우_3_strike() {
-		game.question = "123";
+        generateQuestion("123");
         assertMatchedNumber(game.guess("123"), true, 3, 0);
     }
 
     @Test
     public void 숫자_세개가_전부_일치_하지_않을_경우_0_strike_0_ball() {
-        game.question = "123";
+        generateQuestion("123");
         assertMatchedNumber(game.guess("456"), false, 0, 0);
     }
 
     @Test
     public void 스트라이크만_있을_경우_1_strike_0_ball() {
-        game.question = "123";
+        generateQuestion("123");
         assertMatchedNumber(game.guess("156"), false, 1, 0);
     }
 
     @Test
     public void 볼만_있을_경우_0_strike_1_ball() {
-
+		generateQuestion("123");
+        assertMatchedNumber(game.guess("345"), false, 0, 1);
     }
 
     @Test
     public void 볼과_스트라이크가_함께_있을_경우_1_strike_1_ball() {
 
     }
+    private void generateQuestion(String question) {
+        game.question = question;
+    }
+
 
     private void assertIllegalArgument(String guessNumber) {
         try {
