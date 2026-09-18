@@ -2,8 +2,14 @@ package baseball;
 
 public class Game {
 
-    public void guess(String guessNumber) {
+    public String question;
+
+    public GuessResult guess(String guessNumber) {
         verifyInput(guessNumber);
+        if (guessNumber.equals(question)){
+            return new GuessResult(true, 3, 0);
+        }
+        return null;
     }
 
     private static void verifyInput(String guessNumber) {
