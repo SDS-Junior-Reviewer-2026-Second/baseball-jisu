@@ -6,26 +6,38 @@ public class Game {
 
     public GuessResult guess(String guessNumber) {
         verifyInput(guessNumber);
-        if (guessNumber.equals(question)){
-            return new GuessResult(true, 3, 0);
+        if (isSolved(guessNumber)){
+            return createSolvedResult();
         }
         else {
-            int strikeCnt = 0;
-            int ballCnt = 0;
-            for (int i = 0; i < 3; i++){
-                int digit = guessNumber.charAt(i);
-                int indexInQuestion = question.indexOf(digit);
-                if (indexInQuestion != -1){
-                    if (indexInQuestion == i){
-                        strikeCnt++;
-                    }
-                    else{
-                        ballCnt++;
-                    }
+            return createUnsolvedResult(guessNumber);
+        }
+    }
+
+    private static GuessResult createSolvedResult() {
+        return new GuessResult(true, 3, 0);
+    }
+
+    private GuessResult createUnsolvedResult(String guessNumber) {
+        int strikeCnt = 0;
+        int ballCnt = 0;
+        for (int i = 0; i < 3; i++){
+            int digit = guessNumber.charAt(i);
+            int indexInQuestion = question.indexOf(digit);
+            if (indexInQuestion != -1){
+                if (indexInQuestion == i){
+                    strikeCnt++;
+                }
+                else{
+                    ballCnt++;
                 }
             }
-            return new GuessResult(false, strikeCnt, ballCnt);
         }
+        return new GuessResult(false, strikeCnt, ballCnt);
+    }
+
+    private boolean isSolved(String guessNumber) {
+        return guessNumber.equals(question);
     }
 
     private static void verifyInput(String guessNumber) {
