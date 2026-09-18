@@ -10,7 +10,13 @@ public class Game {
             return new GuessResult(true, 3, 0);
         }
         else {
-            return new GuessResult(false, 0, 0);
+            int strikeCnt = 0;
+            for (int i = 0; i < 3; i++){
+                if (guessNumber.charAt(i) == question.charAt(i)){
+                    strikeCnt++;
+                }
+            }
+            return new GuessResult(false, strikeCnt, 0);
         }
     }
 

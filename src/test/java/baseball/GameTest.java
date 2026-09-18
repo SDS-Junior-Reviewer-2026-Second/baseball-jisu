@@ -38,7 +38,8 @@ public class GameTest {
 
     @Test
     public void 스트라이크만_있을_경우_1_strike_0_ball() {
-
+        game.question = "123";
+        assertMatchedNumber(game.guess("156"), false, 1, 0);
     }
 
     @Test
