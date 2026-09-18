@@ -24,35 +24,16 @@ public class GameTest {
 		assertIllegalArgument("121");
     }
 
-	private void assertIllegalArgument(String guessNumber) {
-		try {
-			game.guess(guessNumber);
-			fail();
-		} catch (IllegalArgumentException e) {
-
-		}
-	}
-
     @Test
     public void 숫자_세개가_전부_일치_할_경우_3_strike() {
 		game.question = "123";
-		GuessResult result = game.guess("123");
-
-		assertThat(result).isNotNull();
-		assertThat(result.isSolved()).isEqualTo(true);
-		assertThat(result.getStrikes()).isEqualTo(3);
-		assertThat(result.getBalls()).isEqualTo(0);
+        assertMatchedNumber(game.guess("123"), true, 3, 0);
     }
 
     @Test
     public void 숫자_세개가_전부_일치_하지_않을_경우_0_strike_0_ball() {
         game.question = "123";
-        GuessResult result = game.guess("456");
-
-        assertThat(result).isNotNull();
-        assertThat(result.isSolved()).isEqualTo(false);
-        assertThat(result.getStrikes()).isEqualTo(0);
-        assertThat(result.getBalls()).isEqualTo(0);
+        assertMatchedNumber(game.guess("456"), false, 0, 0);
     }
 
     @Test
@@ -68,5 +49,21 @@ public class GameTest {
     @Test
     public void 볼과_스트라이크가_함께_있을_경우_1_strike_1_ball() {
 
+    }
+
+    private void assertIllegalArgument(String guessNumber) {
+        try {
+            game.guess(guessNumber);
+            fail();
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
+
+    private static void assertMatchedNumber(GuessResult result, boolean solved, int strikes, int balls) {
+        assertThat(result).isNotNull();
+        assertThat(result.isSolved()).isEqualTo(solved);
+        assertThat(result.getStrikes()).isEqualTo(strikes);
+        assertThat(result.getBalls()).isEqualTo(balls);
     }
 }
