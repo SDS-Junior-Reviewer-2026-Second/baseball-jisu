@@ -1,16 +1,27 @@
 package baseball;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
+	private Game game;
+
+	@BeforeEach
+	void setUp() {
+		game = new Game();
+	}
+
 	@Test
 	public void 입력값이_없을_경우() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			game.guess(null);
+		});
 	}
 	
 	@Test
-	public void 입력값_자리수가_세자리가_아닐�경우() {
+	public void 입력값_자리수가_세자리가_아닐_경우() {
 
 	}
 	
